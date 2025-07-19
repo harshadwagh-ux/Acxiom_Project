@@ -1,0 +1,152 @@
+<div class="maingrid">
+
+    <div class="subgrid1">
+        <div class="userlogin"> Welcome to <br> Acxiom Technologies</div>
+        <div class="subgridwrp">
+            <span class="classlabel"> Name: {{logindata.Name}}</span>
+            <span class="classlabel"> Username: {{logindata.userName}}</span>
+            <div class="btnwrp"> <button mat-flat-button (click)="logout()">logout</button><br></div>
+        </div>
+        <div>
+            <ul>
+                <br>
+                <li class="classlabel">
+                    <a (click)="report('Form')">Fill Servey Form</a>
+                </li><br>
+                <li class="classlabel">
+                    <a (click)="report('Download')">Download Form Data</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="subgrid2" *ngIf="showdivdata">
+        <div class="titleform">Fill Servey Form</div>
+        <div>
+            <form [formGroup]="Serveyform" (ngSubmit)="submit()">
+                <div class="lablewrp">
+                    <label class="classlabel">Name</label>
+                    <input type="text" formControlName="Name" placeholder="Enter your Name" maxlength="50">
+                    <span class="error"
+                        *ngIf="Serveyform.controls.Name.hasError('required') && Serveyform.controls.Name.touched">Name
+                        is required.</span>
+                    <span class="error"
+                        *ngIf="Serveyform.controls.Name.hasError('minlength') && Serveyform.controls.Name.touched">Full
+                        Name must be at
+                        least 3 characters long.</span>
+
+                </div>
+
+                <div class="lablewrp">
+                    <label class="classlabel">Mobile No</label>
+                    <input type="text" formControlName="MobileNo" placeholder="Enter your Name" maxlength="15">
+                    <span class="error"
+                        *ngIf="Serveyform.controls.MobileNo.hasError('required') && Serveyform.controls.MobileNo.touched">Mobile
+                        No is
+                        required.</span>
+                    <span class="error"
+                        *ngIf="Serveyform.controls.MobileNo.hasError('pattern') && Serveyform.controls.MobileNo.touched">Mobile
+                        Number must be
+                        10 digits long.</span>
+
+                </div>
+
+                <div class="lablewrp">
+                    <label class="classlabel">Address</label>
+                    <input type="textarea" formControlName="Address" placeholder="Enter your Address" maxlength="150">
+                    <span class="error"
+                        *ngIf="Serveyform.controls.Address.hasError('required') && Serveyform.controls.Address.touched">Address
+                        is
+                        required.</span>
+                    <span class="error"
+                        *ngIf="Serveyform.controls.Address.hasError('minlength') && Serveyform.controls.Address.touched">Address
+                        must be at
+                        least 3 characters long.</span>
+
+                </div>
+                <div class="lablewrp">
+                    <label class="classlabel">Skills</label>
+                    <select formControlName="Skills" multiple>
+                        @for (item of technologies; track $index) {
+                        <option [value]="item">{{ item }}</option>
+                        }
+                    </select>
+
+                    <span class="error" *ngIf="Serveyform.controls.Skills.hasError('required') && 
+               (Serveyform.controls.Skills.touched || Serveyform.controls.Skills.dirty)">
+                        Please select at least one skill.
+                    </span>
+                </div>
+
+                <div class="lablewrp">
+                    <label class="classlabel">Hobbies</label>
+                    <input type="text" formControlName="Hobbies" placeholder="Enter your Hobbies" maxlength="150">
+                    <span class="error"
+                        *ngIf="Serveyform.controls.Hobbies.invalid && Serveyform.controls.Hobbies.touched">Hobbies
+                        required.!</span>
+                </div>
+
+                <div class="lablewrp">
+                    <label class="classlabel">Photo</label>
+                    <input type="file" formControlName="Photo">
+                    <span class="error"
+                        *ngIf="Serveyform.controls.Photo.invalid && Serveyform.controls.Photo.touched">Photo
+                        required.!</span>
+                </div>
+
+                <div class="btnwrp">
+                    <button mat-flat-button [disabled]="Serveyform.invalid">Submit form</button><br>
+                    <button mat-stroked-button type="button" (click)="clearform()">Reset</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+    <div class="subgrid2 addmoregrid" *ngIf="!showdivdata">
+        <div class="titleform">Export to Excel</div>
+        <div *ngIf="formdata.length!=0" style="margin: auto !important;padding: 10px;">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="Name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element of formdata"> {{element.Name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Mobile No">
+                    <th mat-header-cell *matHeaderCellDef> Mobile No </th>
+                    <td mat-cell *matCellDef="let element of formdata"> {{element.MobileNo}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Address">
+                    <th mat-header-cell *matHeaderCellDef> Address </th>
+                    <td mat-cell *matCellDef="let element of formdata"> {{element.Address}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Skills">
+                    <th mat-header-cell *matHeaderCellDef> Skills </th>
+                    <td mat-cell *matCellDef="let element of formdata">
+                        <ul *ngFor="let i of element.Skills">
+                            <li>{{i}}</li>
+                        </ul>
+                    </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="Hobbies">
+                    <th mat-header-cell *matHeaderCellDef> Hobbies </th>
+                    <td mat-cell *matCellDef="let element of formdata">{{element.Hobbies}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Photo">
+                    <th mat-header-cell *matHeaderCellDef> Photo </th>
+                    <td mat-cell *matCellDef="let element of formdata"> {{element.Photo??"-"}} </td>
+                </ng-container> -->
+                <ng-container matColumnDef="Download">
+                    <th mat-header-cell *matHeaderCellDef> Download </th>
+                    <td mat-cell *matCellDef="let element of formdata"> <a
+                            (click)="downloadreport(element)">Download</a></td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div class="classlabel" style="text-align: center;padding: 10px;" *ngIf="formdata.length==0">No Data Available
+        </div>
+    </div>
+</div>

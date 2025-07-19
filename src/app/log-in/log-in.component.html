@@ -1,0 +1,44 @@
+<section class="container">
+    <div class="headwrp">
+        <span class="userlogin">User Login</span>
+        <span class="Acxiom">Acxiom Technologies</span>
+    </div>
+    <div class="error adderror">
+        @if(showerror){
+        <span>Wrong username or password</span>
+        }
+    </div>
+    <div class="bodywrp">
+        <form [formGroup]="logInForm" (ngSubmit)="submitform()">
+            <div class="lablewrp">
+                <label>Username</label>
+                <input type="text" formControlName="userName" placeholder="Enter your username" maxlength="30">
+                <span class="error"
+                    *ngIf="logInForm.controls.userName.invalid && logInForm.controls.userName.touched">Username
+                    required.!</span>
+            </div>
+            <div class="lablewrp">
+                <label>Password</label>
+                <input [type]="typevariable" formControlName="password" placeholder="Enter your password"
+                    maxlength="15">
+                <div class="errorpasswrp">
+                    <span class="error"
+                        *ngIf="logInForm.controls.password.invalid && logInForm.controls.password.touched">Password
+                        required.!</span>
+                    <mat-icon (click)="pass()">{{ typevariable === 'password' ? 'visibility' : 'visibility_off'
+                        }}</mat-icon>
+                </div>
+
+            </div>
+            <div class="btnwrp">
+                <button mat-flat-button [disabled]="logInForm.invalid">Log In</button><br>
+                <button mat-stroked-button type="button" (click)="clearform()">Clear</button>
+            </div>
+            <div class="Signwrp">
+                <a href="https://www.linkedin.com/in/harshad-wagh-26473521a/" target="_blank">
+                    Access Linkedin Profile
+                </a>
+            </div>
+        </form>
+    </div>
+</section>
