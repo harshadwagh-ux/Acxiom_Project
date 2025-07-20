@@ -4,6 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatIconModule } from '@angular/material/icon';
 import { CommonserviceService } from '../commonservice.service';
 import { Route, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { PassowrdComponent } from '../passowrd/passowrd.component';
 
 @Component({
   selector: 'app-log-in',
@@ -13,7 +15,10 @@ import { Route, Router } from '@angular/router';
 })
 export class LogInComponent {
 
-  constructor( private service :CommonserviceService, private router: Router){
+  constructor( 
+    private service :CommonserviceService, 
+    private router: Router,
+    private popup:MatDialog ){
 
   }
   typevariable ='password'
@@ -50,5 +55,14 @@ logInForm = new FormGroup({
 
   pass(){
      this.typevariable = this.typevariable === 'password' ? 'text' : 'password';
+  }
+
+  password(){
+this.popup.open(PassowrdComponent, {
+      width: '510px',
+      height:'200px',
+      data:[]
+    });
+
   }
 }

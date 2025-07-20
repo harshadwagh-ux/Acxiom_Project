@@ -29,10 +29,36 @@ export class CommonserviceService {
         temp = 'Not Authorised'
       }
     }
-
-
-
     return of(temp);
+  }
+
+  checkusernamr(data:any): Observable<any>{
+    let temp
+    for(let i=0;i<this.user.length;i++){ 
+      if(this.user[i].userName == data.userName){
+        temp = true
+        break;
+      }
+      else{
+         temp = false
+      }
+    }
+    return of(temp)
+  }
+
+  changepassword(data:any): Observable<any>{
+    let temp 
+     for(let i=0;i<this.user.length;i++){ 
+      if(this.user[i].userName == data.username.userName){
+        this.user[i].password = data.password.Password
+        temp = true
+        break;
+      }
+      else{
+         temp = false
+      }
+    }
+    return of (temp)
   }
 
 }

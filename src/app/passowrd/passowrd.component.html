@@ -1,0 +1,29 @@
+    <div class="headwrp">
+        <span class="userlogin">Forgot Password</span>
+    </div>
+
+<form [formGroup]="forgotForm" *ngIf="showbtn">
+    <div class="lablewrp">
+        <label>Username</label>
+        <input type="text" formControlName="userName" placeholder="Enter your username" maxlength="30">
+        <span class="error"
+            *ngIf="forgotForm.controls.userName.invalid && forgotForm.controls.userName.touched">Username
+            required.!</span>
+            <span *ngIf="showerror" class="error">Please provide correct Username!</span>
+    </div>
+</form>
+
+<form [formGroup]="passforgotForm" *ngIf="!showbtn">
+    <div class="lablewrp">
+        <label>New Password</label>
+        <input type="text" formControlName="Password" placeholder="Enter your username" maxlength="30">
+        <span class="error"
+            *ngIf="passforgotForm.controls.Password.hasError('pattern')">Password not follow guidlines.!</span>
+    </div>
+</form>
+
+<div class="btnwrp">
+    <button *ngIf="showbtn" mat-flat-button [disabled]="forgotForm.invalid" (click)="checkusername()">Process</button>
+    <button *ngIf="!showbtn" mat-flat-button [disabled]="passforgotForm.invalid" (click)="Submit()">Submit</button>
+    <button mat-stroked-button type="button" (click)="close()">Close</button>
+</div>
