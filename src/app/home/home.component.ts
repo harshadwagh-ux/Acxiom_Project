@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
     Photo: new FormControl(''),
   })
 
-   displayedColumns: string[] = ['Name', 'Mobile No', 'Address','Skills','Download'];
+   displayedColumns: string[] = ['Name', 'Mobile No', 'Address','Skills','Hobbies','Photo','Download'];
     dataSource = new MatTableDataSource<any>();
 
   constructor(private service: CommonserviceService,

@@ -124,19 +124,19 @@
                 <ng-container matColumnDef="Skills">
                     <th mat-header-cell *matHeaderCellDef> Skills </th>
                     <td mat-cell *matCellDef="let element of formdata">
-                        <ul *ngFor="let i of element.Skills">
-                            <li>{{i}}</li>
-                        </ul>
+                        <div *ngFor="let i of element.Skills">
+                            <span>{{i}}</span>
+                        </div>
                     </td>
                 </ng-container>
-                <!-- <ng-container matColumnDef="Hobbies">
+                <ng-container matColumnDef="Hobbies">
                     <th mat-header-cell *matHeaderCellDef> Hobbies </th>
                     <td mat-cell *matCellDef="let element of formdata">{{element.Hobbies}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Photo">
                     <th mat-header-cell *matHeaderCellDef> Photo </th>
                     <td mat-cell *matCellDef="let element of formdata"> {{element.Photo??"-"}} </td>
-                </ng-container> -->
+                </ng-container>
                 <ng-container matColumnDef="Download">
                     <th mat-header-cell *matHeaderCellDef> Download </th>
                     <td mat-cell *matCellDef="let element of formdata"> <a

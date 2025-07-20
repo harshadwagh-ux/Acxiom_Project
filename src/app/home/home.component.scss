@@ -120,6 +120,10 @@ select {
 ul{
     margin-left: 10%;
 }
+li{
+        list-style-type: none;
+    text-align: justify;
+}
 
 a{
     text-decoration: underline;
@@ -145,6 +149,9 @@ th{
 
 
 @media (max-width: 768px) {
+.mdc-data-table__cell, .mdc-data-table__header-cell {
+        padding: 0px !important;
+}
   .maingrid {
     display: grid;
     grid-template-columns: 1fr;  
@@ -161,16 +168,16 @@ th{
 
   .subgrid2 {
     grid-area: auto;
-    width: 90%;
+      width: 70% ; 
     margin: 10px auto;
   }
   .addmoregrid{
-    width: 95%;
+    width: 90%;
     margin: auto;
 }
 
   .subgridwrp {
-    width: 100%;
+    width: 75%;
     margin-top: 20px;
   }
 }
